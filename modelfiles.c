@@ -353,9 +353,11 @@ void SaveRules(CRuleSet RS, String Extension)
     ForEach(ri, 1, RS->SNRules)
     {
 	R = RS->SRule[ri];
-	fprintf(TRf, "conds=\"%d\" cover=\"%g\" ok=\"%g\" lift=\"%g\"",
+	fprintf(TRf, "conds=\"%d\" cover=\"%g\" ok=\"%g\" lift=\"%g\" confidence=\"%lf\"",
 		     R->Size, R->Cover, R->Correct,
-		     (R->Correct + 1) / ((R->Cover + 2) * R->Prior));
+		     (R->Correct + 1) / ((R->Cover + 2) * R->Prior),
+             ((double)R->Vote/1000.0)
+             );
 	AsciiOut(" class=", ClassName[R->Rhs]);
 	fprintf(TRf, "\n");
 
